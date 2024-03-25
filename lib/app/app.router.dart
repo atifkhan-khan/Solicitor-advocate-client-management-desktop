@@ -7,6 +7,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/material.dart';
+import 'package:flutter_desktop_app_advocate/data/userForm/ledgersDataModel.dart'
+    as _i8;
 import 'package:flutter_desktop_app_advocate/ui/views/add_update_legders/add_update_legders_view.dart'
     as _i6;
 import 'package:flutter_desktop_app_advocate/ui/views/client_account/client_account_view.dart'
@@ -18,7 +20,7 @@ import 'package:flutter_desktop_app_advocate/ui/views/ledger_form/ledger_form_vi
 import 'package:flutter_desktop_app_advocate/ui/views/startup/startup_view.dart'
     as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i8;
+import 'package:stacked_services/stacked_services.dart' as _i9;
 
 class Routes {
   static const homeView = '/home-view';
@@ -90,8 +92,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i6.AddUpdateLegdersView: (data) {
+      final args = data.getArgs<AddUpdateLegdersViewArguments>(nullOk: false);
       return _i7.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i6.AddUpdateLegdersView(),
+        builder: (context) => _i6.AddUpdateLegdersView(
+            key: args.key, ledgersData: args.ledgersData),
         settings: data,
       );
     },
@@ -104,7 +108,34 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i8.NavigationService {
+class AddUpdateLegdersViewArguments {
+  const AddUpdateLegdersViewArguments({
+    this.key,
+    required this.ledgersData,
+  });
+
+  final _i7.Key? key;
+
+  final _i8.LedgersData ledgersData;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "ledgersData": "$ledgersData"}';
+  }
+
+  @override
+  bool operator ==(covariant AddUpdateLegdersViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.ledgersData == ledgersData;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ ledgersData.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i9.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -161,14 +192,18 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAddUpdateLegdersView([
+  Future<dynamic> navigateToAddUpdateLegdersView({
+    _i7.Key? key,
+    required _i8.LedgersData ledgersData,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.addUpdateLegdersView,
+        arguments:
+            AddUpdateLegdersViewArguments(key: key, ledgersData: ledgersData),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -231,14 +266,18 @@ extension NavigatorStateExtension on _i8.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAddUpdateLegdersView([
+  Future<dynamic> replaceWithAddUpdateLegdersView({
+    _i7.Key? key,
+    required _i8.LedgersData ledgersData,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.addUpdateLegdersView,
+        arguments:
+            AddUpdateLegdersViewArguments(key: key, ledgersData: ledgersData),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

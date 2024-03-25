@@ -68,7 +68,7 @@ class LedgerFormView extends StackedView<LedgerFormViewModel> {
                     ),
                   ),
                   verticalSpaceSmall,
-                  Text('Amount'),
+                  /*Text('Amount'),
                   verticalSpaceSmall,
                   Container(
                     width: 100,
@@ -78,7 +78,7 @@ class LedgerFormView extends StackedView<LedgerFormViewModel> {
                       controller: viewModel.countController,
                       decoration: InputDecoration(),
                     ),
-                  ),
+                  ),*/
                   verticalSpaceSmall,
                   Text('Ledgers Description'),
                   TextField(

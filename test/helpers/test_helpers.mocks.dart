@@ -7,7 +7,10 @@ import 'dart:async' as _i4;
 import 'dart:ui' as _i5;
 
 import 'package:flutter/material.dart' as _i3;
-import 'package:flutter_desktop_app_advocate/data/ledgersDataModel.dart' as _i7;
+import 'package:flutter_desktop_app_advocate/data/ledgersData/userLedgerDataModel.dart'
+    as _i8;
+import 'package:flutter_desktop_app_advocate/data/userForm/ledgersDataModel.dart'
+    as _i7;
 import 'package:flutter_desktop_app_advocate/services/hive_d_b_service.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
@@ -701,4 +704,30 @@ class MockHiveDBService extends _i1.Mock implements _i6.HiveDBService {
         returnValueForMissingStub:
             _i4.Future<List<_i7.LedgersData>>.value(<_i7.LedgersData>[]),
       ) as _i4.Future<List<_i7.LedgersData>>);
+
+  @override
+  _i4.Future<dynamic> addUserLedger(
+          _i8.UserLedgersDataModel? userLedgersDataModel) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addUserLedger,
+          [userLedgersDataModel],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+        returnValueForMissingStub: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+
+  @override
+  _i4.Future<List<_i8.UserLedgersDataModel>> getUserLedgers(int? formID) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserLedgers,
+          [formID],
+        ),
+        returnValue: _i4.Future<List<_i8.UserLedgersDataModel>>.value(
+            <_i8.UserLedgersDataModel>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i8.UserLedgersDataModel>>.value(
+                <_i8.UserLedgersDataModel>[]),
+      ) as _i4.Future<List<_i8.UserLedgersDataModel>>);
 }

@@ -14,6 +14,7 @@ class ClientAccountView extends StackedView<ClientAccountViewModel> {
   void onViewModelReady(ClientAccountViewModel viewModel) {
     // TODO: implement onViewModelReady
     viewModel.hiveDBService.getLedgers();
+    viewModel.notifyListeners();
     super.onViewModelReady(viewModel);
   }
 
@@ -73,7 +74,7 @@ class ClientAccountView extends StackedView<ClientAccountViewModel> {
                     //height: 50,
                     child: InkWell(
                       onTap: (){
-                        viewModel.navService.navigateToAddUpdateLegdersView();
+                        viewModel.navService.navigateToAddUpdateLegdersView(ledgersData: viewModel.listOfLedgers[index]);
                       },
                       child: Card(
                         color: kcLightGrey,
@@ -83,7 +84,7 @@ class ClientAccountView extends StackedView<ClientAccountViewModel> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Amount: ${viewModel.listOfLedgers[index].amount.toString()}£"),
+                                  //Text("Amount: ${viewModel.listOfLedgers[index].amount.toString()}£"),
                                   Text(viewModel.listOfLedgers[index].description),
                                 ],
                               ),

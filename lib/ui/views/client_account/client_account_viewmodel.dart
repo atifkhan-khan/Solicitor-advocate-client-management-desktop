@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import '../../../app/app.locator.dart';
-import '../../../data/ledgersDataModel.dart';
+import '../../../data/userForm/ledgersDataModel.dart';
 import '../../../services/hive_d_b_service.dart';
 
 class ClientAccountViewModel extends BaseViewModel with Initialisable {
@@ -27,10 +27,6 @@ class ClientAccountViewModel extends BaseViewModel with Initialisable {
 
   getAllLedgers() async {
     listOfLedgers = await hiveDBService.getLedgers();
-    print(listOfLedgers.first.name.toString());
-    print(listOfLedgers.first.amount.toString());
-    print(listOfLedgers.first.description.toString());
-    print(listOfLedgers.first.formID.toString());
     notifyListeners();
   }
 

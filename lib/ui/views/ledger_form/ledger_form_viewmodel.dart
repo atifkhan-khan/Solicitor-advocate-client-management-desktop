@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_desktop_app_advocate/data/ledgersDataModel.dart';
+import 'package:flutter_desktop_app_advocate/data/userForm/ledgersDataModel.dart';
 import 'package:flutter_desktop_app_advocate/services/hive_d_b_service.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +12,7 @@ class LedgerFormViewModel extends BaseViewModel with Initialisable {
   final navigationService = locator<NavigationService>();
   final hiveDBService = locator<HiveDBService>();
   TextEditingController nameController = new TextEditingController();
-  TextEditingController countController = new TextEditingController();
+//  TextEditingController countController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
 
   String name = '';
@@ -26,7 +26,7 @@ class LedgerFormViewModel extends BaseViewModel with Initialisable {
   }
 
   addLedgerForm() {
-    int count = int.parse(countController.text);
+    //int count = int.parse(countController.text);
     /* ledgersData.name = nameController.text;
     ledgersData.amount = count;
     ledgersData.description = descriptionController.text;*/
@@ -37,9 +37,9 @@ class LedgerFormViewModel extends BaseViewModel with Initialisable {
 
         formID: UniqueKey().hashCode,
         name: nameController.text.toString(),
-        amount: count,
+        amount: id,
         description: descriptionController.text.toString());
-    hiveDBService.addLedger(id, ledgersData);
+    hiveDBService.addLedger(ledgersData);
     navigationService.back();
     // final box = Hive.box<String>("ledgerBox");
     /* name = box.get("name")!;
