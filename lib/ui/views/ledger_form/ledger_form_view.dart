@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_desktop_app_advocate/app/app.router.dart';
 import 'package:flutter_desktop_app_advocate/ui/common/app_colors.dart';
 import 'package:flutter_desktop_app_advocate/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
@@ -33,7 +34,7 @@ class LedgerFormView extends StackedView<LedgerFormViewModel> {
                 alignment: Alignment.topLeft,
                 child: IconButton(
                     onPressed: () {
-                      viewModel.navigationService.back();
+                      viewModel.navigationService.replaceWithClientAccountView();
                     },
                     icon: Icon(Icons.cancel))),
             Center(

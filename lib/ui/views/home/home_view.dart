@@ -10,6 +10,13 @@ class HomeView extends StackedView<HomeViewModel> {
   const HomeView({Key? key}) : super(key: key);
 
   @override
+  void onViewModelReady(HomeViewModel viewModel) {
+    // TODO: implement onViewModelReady
+    viewModel.hiveDBService.openDB();
+    super.onViewModelReady(viewModel);
+  }
+
+  @override
   Widget builder(
     BuildContext context,
     HomeViewModel viewModel,
@@ -52,6 +59,14 @@ class HomeView extends StackedView<HomeViewModel> {
                       onPressed: () {},
                       child: Text(
                         'Office Account',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    MaterialButton(
+                      color: kcPrimaryColor,
+                      onPressed: () {viewModel.clearData();},
+                      child: Text(
+                        'clear Account',
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),

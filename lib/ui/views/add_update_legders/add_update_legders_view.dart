@@ -79,11 +79,10 @@ class AddUpdateLegdersView extends StackedView<AddUpdateLegdersViewModel> {
                                         "${viewModel.listOfUserLedgers[index].status}: ${viewModel.listOfUserLedgers[index].status=='IN' ? '+':'-' } ${viewModel.listOfUserLedgers[index].amount.toString()}£",
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                      Text(
-                                        "Description",
+                                      Text("${ledgersData.description}",
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                      Text("Date: ${viewModel.cdate}",
+                                      Text("Date: ${viewModel.listOfUserLedgers[index].dateTime}",
                                           style: TextStyle(color: Colors.white)),
                                     ],
                                   ),
@@ -136,7 +135,6 @@ class AddUpdateLegdersView extends StackedView<AddUpdateLegdersViewModel> {
                           child: MaterialButton(
                             onPressed: () {
                               viewModel.addLedgerForm("Out");
-                              viewModel.addOfficeForm("IN");
                             },
                             child: Text('OUT'),
                           ),
@@ -171,11 +169,10 @@ class AddUpdateLegdersView extends StackedView<AddUpdateLegdersViewModel> {
                                         "${viewModel.listOfOfficeLedgers[index].status}: ${viewModel.listOfOfficeLedgers[index].status=='IN' ? '+':'-' } ${viewModel.listOfOfficeLedgers[index].amount.toString()}£",
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                      Text(
-                                        "Description",
+                                      Text("${ledgersData.description}",
                                         style: TextStyle(color: Colors.white),
                                       ),
-                                      Text("Date: ${viewModel.cdate}",
+                                      Text("Date: ${viewModel.listOfOfficeLedgers[index].dateTime}",
                                           style: TextStyle(color: Colors.white)),
                                     ],
                                   ),

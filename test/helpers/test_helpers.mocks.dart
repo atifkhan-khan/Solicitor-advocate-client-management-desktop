@@ -9,6 +9,8 @@ import 'dart:ui' as _i5;
 import 'package:flutter/material.dart' as _i3;
 import 'package:flutter_desktop_app_advocate/data/ledgersData/userLedgerDataModel.dart'
     as _i8;
+import 'package:flutter_desktop_app_advocate/data/officeAccountLedger/officeLedger.dart'
+    as _i9;
 import 'package:flutter_desktop_app_advocate/data/userForm/ledgersDataModel.dart'
     as _i7;
 import 'package:flutter_desktop_app_advocate/services/hive_d_b_service.dart'
@@ -677,17 +679,11 @@ class MockHiveDBService extends _i1.Mock implements _i6.HiveDBService {
       ) as _i4.Future<dynamic>);
 
   @override
-  _i4.Future<dynamic> addLedger(
-    int? id,
-    _i7.LedgersData? ledgersData,
-  ) =>
+  _i4.Future<dynamic> addLedger(_i7.LedgersData? ledgersData) =>
       (super.noSuchMethod(
         Invocation.method(
           #addLedger,
-          [
-            id,
-            ledgersData,
-          ],
+          [ledgersData],
         ),
         returnValue: _i4.Future<dynamic>.value(),
         returnValueForMissingStub: _i4.Future<dynamic>.value(),
@@ -730,4 +726,30 @@ class MockHiveDBService extends _i1.Mock implements _i6.HiveDBService {
             _i4.Future<List<_i8.UserLedgersDataModel>>.value(
                 <_i8.UserLedgersDataModel>[]),
       ) as _i4.Future<List<_i8.UserLedgersDataModel>>);
+
+  @override
+  _i4.Future<dynamic> addOfficeLedger(
+          _i9.OfficeLedgersDataModel? officeLedgersDataModel) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addOfficeLedger,
+          [officeLedgersDataModel],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+        returnValueForMissingStub: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+
+  @override
+  _i4.Future<List<_i9.OfficeLedgersDataModel>> getOfficeLedgers(int? formID) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getOfficeLedgers,
+          [formID],
+        ),
+        returnValue: _i4.Future<List<_i9.OfficeLedgersDataModel>>.value(
+            <_i9.OfficeLedgersDataModel>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i9.OfficeLedgersDataModel>>.value(
+                <_i9.OfficeLedgersDataModel>[]),
+      ) as _i4.Future<List<_i9.OfficeLedgersDataModel>>);
 }

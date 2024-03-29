@@ -10,9 +10,16 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:path_provider/path_provider.dart' as path;
+import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+    WindowManager.instance.setMinimumSize(const Size(1200, 600));
+    WindowManager.instance.setMaximumSize(const Size(1600, 1000));
+
   var dir = await path.getApplicationDocumentsDirectory();
   Hive.init(dir.path);
   Hive.initFlutter('advocateDB');

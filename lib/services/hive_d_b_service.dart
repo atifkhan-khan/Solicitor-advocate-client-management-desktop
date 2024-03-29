@@ -11,8 +11,18 @@ class HiveDBService {
      await Hive.openBox<OfficeLedgersDataModel>("addOfficeLedger");
   }
 
+  clearDB(){
+    final box = Hive.box<LedgersData>("ledgerForm");
+    final box1 = Hive.box<UserLedgersDataModel>("addUserLedger");
+    final box2 = Hive.box<OfficeLedgersDataModel>("addOfficeLedger");
+    box.clear();
+    box1.clear();
+    box2.clear();
+  }
+
   Future addLedger(LedgersData ledgersData) async {
     print("ledgers: ${ledgersData.name.toString()}");
+   // print("ledgers: Date ${ledgersData.dateTime.toString()}");
 
     final box = Hive.box<LedgersData>("ledgerForm");
     await box.add(ledgersData);

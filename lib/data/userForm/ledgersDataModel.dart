@@ -16,5 +16,8 @@ class LedgersData {
   @HiveField(3)
   String description = '';
 
-  LedgersData({required this.formID, required this.name, required this.amount, required this.description});
+  @HiveField(4)
+  String dateTime ='' ;
+
+  LedgersData({required this.formID, required this.name, required this.amount, required this.description,required this.dateTime});
 }

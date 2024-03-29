@@ -4,11 +4,13 @@ import 'package:intrinsic_grid_view/intrinsic_grid_view.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../common/app_colors.dart';
+import '../../common/app_strings.dart';
 import '../../common/ui_helpers.dart';
+import '../../common/widgets/customDropDown.dart';
 import 'client_account_viewmodel.dart';
 
 class ClientAccountView extends StackedView<ClientAccountViewModel> {
-  const ClientAccountView({Key? key}) : super(key: key);
+   ClientAccountView({Key? key}) : super(key: key);
 
   @override
   void onViewModelReady(ClientAccountViewModel viewModel) {
@@ -42,23 +44,71 @@ class ClientAccountView extends StackedView<ClientAccountViewModel> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 chipsStatus(viewModel),
-                Container(
-                    margin: EdgeInsets.only(right: 40),
-                    decoration: BoxDecoration(
-                        color: kcPrimaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(80))),
-                    child: TextButton.icon(
-                        onPressed:
+                Row(
+                  children: [
+                    Container(
+                        height: 40,
+                        width: 150,
+                        padding: EdgeInsets.all(9),
+                        margin: EdgeInsets.only(right: 40),
+                        decoration: BoxDecoration(
+                            //color: kcPrimaryColor,
+                          border: Border.all(color: kcLightGrey),
+                            borderRadius: BorderRadius.all(Radius.circular(80))),
+
+                        child: TextField(
+                          controller: viewModel.searchController,
+                          onChanged: (value){
+                            viewModel.searchUser(value);
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                              hintText: "Search here",
+                              suffixIcon: Icon(Icons.search)
+                          ),
+                        )
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(right: 40),
+                        decoration: BoxDecoration(
+                            color: kcPrimaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(80))),
+
+                        child: TextButton.icon(
+                            onPressed:
                             viewModel.navService.navigateToLedgerFormView,
-                        icon: Icon(
-                          Icons.add,
-                          color: kcBackgroundColor,
-                        ),
-                        label: Text(
-                          'Add Ledgers',
-                          style: TextStyle(color: kcBackgroundColor),
-                        ))
-                ),
+                            icon: Icon(
+                              Icons.add,
+                              color: kcBackgroundColor,
+                            ),
+                            label: Text(
+                              'Add Ledgers',
+                              style: TextStyle(color: kcBackgroundColor),
+                            ))
+                    ),
+                    DropdownMenuExample(viewModel: viewModel,)
+                   /* Container(
+                        margin: EdgeInsets.only(right: 40),
+                        decoration: BoxDecoration(
+                            color: kcPrimaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(80))),
+
+                        child: TextButton.icon(
+                            onPressed:(){
+                              //viewModel.navService.navigateToLedgerFormView();
+                            },
+                            icon: Icon(
+                              Icons.filter_alt_sharp,
+                              color: kcBackgroundColor,
+                            ),
+                            label: Text(
+                              'Apply Filter',
+                              style: TextStyle(color: kcBackgroundColor),
+                            ),)
+                    ),*/
+
+                  ],
+                )
               ],
             ),
             verticalSpaceMedium,
@@ -68,24 +118,25 @@ class ClientAccountView extends StackedView<ClientAccountViewModel> {
                 horizontalSpace: 3,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 children:
-                    List.generate(viewModel.listOfLedgers.length, (index) {
+                    List.generate(viewModel.searchlistOfLedgers.length, (index) {
                   return Container(
                     width: 100,
                     //height: 50,
                     child: InkWell(
                       onTap: (){
-                        viewModel.navService.navigateToAddUpdateLegdersView(ledgersData: viewModel.listOfLedgers[index]);
+                        viewModel.navService.navigateToAddUpdateLegdersView(ledgersData: viewModel.searchlistOfLedgers[index]);
                       },
                       child: Card(
                         color: kcLightGrey,
                         child: ListTile(
-                          title: Text(viewModel.listOfLedgers[index].name),
+                          title: Text(viewModel.searchlistOfLedgers[index].name),
                           subtitle:
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   //Text("Amount: ${viewModel.listOfLedgers[index].amount.toString()}£"),
-                                  Text(viewModel.listOfLedgers[index].description),
+                                  Text(viewModel.searchlistOfLedgers[index].description),
+
                                 ],
                               ),
                         ),
@@ -146,4 +197,35 @@ Widget chipsStatus(ClientAccountViewModel model) {
       ],
     ),
   );
+}
+
+class DropdownMenuExample extends StatefulWidget {
+  ClientAccountViewModel viewModel;
+  DropdownMenuExample({super.key,required this.viewModel});
+
+  @override
+  State<DropdownMenuExample> createState() => _DropdownMenuExampleState();
+}
+
+class _DropdownMenuExampleState extends State<DropdownMenuExample> {
+  String dropdownValue = list.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownMenu<String>(
+      trailingIcon: Icon(Icons.filter_alt_sharp),
+      //initialSelection: list.first,
+      hintText: 'Apply Filter',
+      enableSearch: false,
+      onSelected: (String? value) {
+        // This is called when the user selects an item.
+        setState(() {
+          dropdownValue = value!;
+        });
+      },
+      dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+        return DropdownMenuEntry<String>(value: value, label: value);
+      }).toList(),
+    );
+  }
 }

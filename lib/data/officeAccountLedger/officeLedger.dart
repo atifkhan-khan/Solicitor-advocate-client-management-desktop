@@ -18,5 +18,8 @@ class OfficeLedgersDataModel {
   @HiveField(3)
   String status = "";
 
-  OfficeLedgersDataModel({required this.userFormID, required this.ledgerID, required this.amount, required this.status});
+  @HiveField(4)
+  String dateTime ="" ;
+
+  OfficeLedgersDataModel({required this.userFormID, required this.ledgerID, required this.amount, required this.status,required this.dateTime});
 }
