@@ -86,26 +86,87 @@ class ClientAccountView extends StackedView<ClientAccountViewModel> {
                               style: TextStyle(color: kcBackgroundColor),
                             ))
                     ),
-                    DropdownMenuExample(viewModel: viewModel,)
-                   /* Container(
-                        margin: EdgeInsets.only(right: 40),
-                        decoration: BoxDecoration(
-                            color: kcPrimaryColor,
-                            borderRadius: BorderRadius.all(Radius.circular(80))),
-
-                        child: TextButton.icon(
-                            onPressed:(){
-                              //viewModel.navService.navigateToLedgerFormView();
-                            },
-                            icon: Icon(
-                              Icons.filter_alt_sharp,
-                              color: kcBackgroundColor,
+                    //DropdownMenuExample(viewModel: viewModel,)
+                    Text("${viewModel.filterString}"),
+                    PopupMenuButton<int>(
+                      tooltip: "Sort By",
+                      icon: Icon(Icons.keyboard_arrow_down_outlined),
+                      initialValue: 0,
+                      itemBuilder: (BuildContext context) {
+                        return <PopupMenuEntry<int>>[
+                          PopupMenuItem<int>(
+                            value: 1,
+                            child: Text(
+                              'None',
                             ),
-                            label: Text(
-                              'Apply Filter',
-                              style: TextStyle(color: kcBackgroundColor),
-                            ),)
-                    ),*/
+                            onTap: () {
+                              viewModel.changeFilterText("Filter");
+                              print("sorted Latest Products");
+                             // viewModel.LatestSort();
+                             // viewModel.notifyListeners();
+                             /* model.refreshData();
+                              model.getProductsdata(
+                                  model.sorting, model.filter);*/
+                            },
+                          ),
+                          PopupMenuItem<int>(
+                            value: 2,
+                            child: Text(
+                              'Latest First',
+                            ),
+                            onTap: () {
+                              viewModel.changeFilterText("Latest First");
+                              print("sorted Latest Products");
+                              viewModel.LatestSort();
+                              viewModel.notifyListeners();
+                             /* model.refreshData();
+                              model.getProductsdata(
+                                  model.sorting, model.filter);*/
+                            },
+                          ),
+                          PopupMenuItem<int>(
+                            value: 3,
+                            child: Text(
+                              'Oldest First',
+                             // style: mediumSmallTextStyle,
+                            ),
+                            onTap: () {
+                              viewModel.changeFilterText("Oldest First");
+                              print("sorted Price Low to High");
+                              // Body of value1
+                            },
+                          ),
+                          PopupMenuItem<int>(
+                            value: 4,
+                            child: Text(
+                              'A-Z sort',
+                            //  style: mediumSmallTextStyle,
+                            ),
+                            onTap: () {
+                              viewModel.AtoZSort();
+                              viewModel.changeFilterText("A-Z sort");
+                              viewModel.notifyListeners();
+                            },
+                          ),
+                          PopupMenuItem<int>(
+                            value: 5,
+                            child: Text(
+                              'Z-A sort',
+                             // style: mediumSmallTextStyle,
+                            ),
+                            onTap: () {
+                              viewModel.changeFilterText("Z-A sort");
+                              viewModel.ZtoASort();
+                              viewModel.notifyListeners();
+                              print("sorted Popularity");
+                              // Body of value1
+
+                            },
+                          ),
+
+                        ];
+                      },
+                    ),
 
                   ],
                 )
@@ -136,6 +197,7 @@ class ClientAccountView extends StackedView<ClientAccountViewModel> {
                                 children: [
                                   //Text("Amount: ${viewModel.listOfLedgers[index].amount.toString()}£"),
                                   Text(viewModel.searchlistOfLedgers[index].description),
+                                  Text(viewModel.searchlistOfLedgers[index].dateTime),
 
                                 ],
                               ),
@@ -208,7 +270,7 @@ class DropdownMenuExample extends StatefulWidget {
 }
 
 class _DropdownMenuExampleState extends State<DropdownMenuExample> {
-  String dropdownValue = list.first;
+  String dropdownValue = filterList.first;
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +285,7 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
           dropdownValue = value!;
         });
       },
-      dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+      dropdownMenuEntries: filterList.map<DropdownMenuEntry<String>>((String value) {
         return DropdownMenuEntry<String>(value: value, label: value);
       }).toList(),
     );

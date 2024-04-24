@@ -20,7 +20,7 @@ class ClientAccountViewModel extends BaseViewModel with Initialisable {
   int chipSelectedValue = 0;
 
   List<String> chipsList = ["Ledgers", "Reconcilliation"];
-  String addmembersValue = "";
+  String filterString = "Filter";
   String chosenValue = "";
 
 
@@ -33,9 +33,31 @@ class ClientAccountViewModel extends BaseViewModel with Initialisable {
     // print(listOfLedgers.toString());
   }
 
-  void addMembers(String text) {
-    addmembersValue = text;
+  void changeFilterText(String text) {
+    filterString = text;
     notifyListeners();
+  }
+
+  void LatestSort() {
+   // searchlistOfLedgers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
+   // searchlistOfLedgers = searchlistOfLedgers.sort((a,b) => a.name.compareTo(b.name));
+    print("${searchlistOfLedgers[2].dateTime.toString()}");
+    notifyListeners();
+    return searchlistOfLedgers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
+  }
+  void AtoZSort() {
+   /* searchlistOfLedgers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
+    searchlistOfLedgers = searchlistOfLedgers.sort((a,b) => a.name.compareTo(b.name));*/
+    print("${searchlistOfLedgers[2].name.toString()}");
+    notifyListeners();
+    return searchlistOfLedgers.sort((a, b) => a.name.compareTo(b.name));
+  }
+  void ZtoASort() {
+   /* searchlistOfLedgers.sort((a,b) => a.dateTime.compareTo(b.dateTime));
+    searchlistOfLedgers = searchlistOfLedgers.sort((a,b) => a.name.compareTo(b.name));*/
+    print("${searchlistOfLedgers[2].name.toString()}");
+    notifyListeners();
+    return searchlistOfLedgers.sort((a, b) => b.name.compareTo(a.name));
   }
 
   void changeText(String text) {

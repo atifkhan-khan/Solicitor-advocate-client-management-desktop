@@ -63,6 +63,7 @@ class AddUpdateLegdersViewModel extends BaseViewModel {
     });
     notifyListeners();
   }
+  
 
   addLedgerForm(String status) {
     int count = int.parse(clientTextController.text);
@@ -116,7 +117,6 @@ class AddUpdateLegdersViewModel extends BaseViewModel {
     }
     if(status=='IN')
     hiveDBService.addOfficeLedger(officeLedgersDataModel);
-
     getOfficeLedgers();
     officeTotalAmountCalculation();
     totalAmountCalculation();

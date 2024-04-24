@@ -3,7 +3,7 @@ const String ksHomeBottomSheetDescription =
     'Stacked is built to help you build better apps. Give us a chance and we\'ll prove it to you. Check out stacked.filledstacks.com to learn more';
 const String selectMembersString = "Select members";
 const String selectGenderString = "Select";
-const List<String> list = <String>['A to Z', 'Latest first', 'Specific Date', 'Specific Month'];
+const List<String> filterList = <String>['none','A to Z', 'Latest first', 'Specific Date', 'Specific Month'];
 
 
 
